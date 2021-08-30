@@ -1,15 +1,12 @@
-import React from 'react';
+// import React from 'react';
 import ReactDOM from 'react-dom';
+import {FunctionComponent, ClassComponent} from "./componentsBasics";
 
-// import App from './App';
-
-
-// let reactDivElement = React.createElement( "div" , {className: "App"} ,"fffff");
-let reactDivElementJSX = <div>JSX demo</div>;
-console.dir(reactDivElementJSX);
+const el = new ClassComponent();
 
 ReactDOM.render(
-  reactDivElementJSX,
+  // FunctionComponent(),
+  el.render(),
   document.getElementById('root')
 );
 
