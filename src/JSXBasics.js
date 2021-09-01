@@ -6,7 +6,8 @@ const tooltipStr = "Tooltip text";
 
 function JSXBasics(props) {
 	console.dir(props);
-	return <div  title={tooltipStr} class="App" data-id="3" >{2+2} - {innerHTML}</div>;
+	// @ts-ignore
+	return <div  title={tooltipStr} className="App" data-id="3" tabIndex="2" >{2+2} - {innerHTML}</div>;
 }
 
 

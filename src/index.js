@@ -1,17 +1,12 @@
 // import React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import JSXBasics from "./JSXBasics";
+import App from './App';
 
 // const el = new ClassComponent();
 
 ReactDOM.render(
-  // <FunctionComponent/>,
-  <JSXBasics/>,
-
-  // <div>Hello</div>,
-
-
-  // el.render(),
+  <App/>,
   document.getElementById('root')
 );
 
