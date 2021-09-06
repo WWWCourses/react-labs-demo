@@ -2,6 +2,7 @@ import React from "react";
 import JSXBasics from "./JSXBasics";
 import JSXLists from "./JSXLists";
 import PropsDemo from "./PropsDemo";
+import StateDemo from "./StateDemo";
 
 
 function App(props) {
@@ -9,7 +10,8 @@ function App(props) {
 		<div>
 			{/* <JSXBasics/>
 			<JSXLists/> */}
-			<PropsDemo/>
+			{/* <PropsDemo/> */}
+			<StateDemo/>
 		</div>
 	)
 

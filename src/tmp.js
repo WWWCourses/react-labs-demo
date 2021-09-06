@@ -1,13 +1,8 @@
-const numbers = [1,2,3]
-let numerItems = [];
+function foo({name}, other) {
+	console.log(name, other);
+}
 
-// for (let i = 0; i < numbers.length; i++) {
-// 	str += numbers[i]
-// }
-
-// numbers.forEach( v=> str += v)
-
-numerItems = numbers.map( number=>`<li>${number}</li>` )
-
-
-console.log(numerItems);
+foo({
+	name: "ada",
+	age:23
+},"other");

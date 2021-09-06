@@ -22,17 +22,27 @@ function Parent(props) {
 	return (
 		<div>
 			<ChildF name={user.name} age={user.age} />
-			<ChildC name={user.name} age={user.age} />
+			{/* <ChildC name={user.name} age={user.age} /> */}
 		</div>
 	)
 }
 
 
-function ChildF( {name} ) {
+
+function ChildF(props ) {
+	console.dir(props)
 	return (
-		<div>Welcome, {name}</div>
+		<div>
+			<Welcome userName={props.name}/>
+		</div>
 	)
 }
+
+function Welcome(props){
+
+	return <div>Hello, {props.userName.toUpperCase()}</div>
+}
+
 
 class ChildC extends React.Component{
 	render(){
