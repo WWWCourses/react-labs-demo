@@ -3,6 +3,9 @@ import JSXBasics from "./JSXBasics";
 import JSXLists from "./JSXLists";
 import PropsDemo from "./PropsDemo";
 import StateDemo from "./StateDemo";
+import EventsDemo from "./EventsDemo";
+import FormsDemo from "./FormsDemo";
+import Welcome from "./LifeCycleDemo";
 
 
 function App(props) {
@@ -11,7 +14,10 @@ function App(props) {
 			{/* <JSXBasics/>
 			<JSXLists/> */}
 			{/* <PropsDemo/> */}
-			<StateDemo/>
+			{/* <StateDemo/> */}
+			{/* <EventsDemo/> */}
+			{/* <FormsDemo/> */}
+			<Welcome/>
 		</div>
 	)
 
