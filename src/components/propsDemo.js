@@ -1,11 +1,25 @@
-function GetUserName(props) {
-	let userName = 'Ada';
-	return <GreetUser userName={userName} userFamily="Byron"/>
+import { Component } from "react";
+
+function Parent(props) {
+	return ( <Child id="p1" userName={props.userName}>@@@@</Child> );
 }
 
-function GreetUser(props) {
-	console.dir(props)
-	return <div id="el1" className="red">Hello, {props.userName} {props.userFamily}</div>
+// function Child(props) {
+// 	console.log(props);
+// 	return ( <div>Child</div> );
+// }
+
+class Child extends Component {
+	constructor(props){
+		super(props)
+		// this.props = props
+	}
+
+	render() {
+		console.log(this.props);
+		this.props.userName = "Pesho";
+		return (<div>Hello, {this.props.userName}</div>);
+	}
 }
 
-export {GetUserName}
+export default Parent;
