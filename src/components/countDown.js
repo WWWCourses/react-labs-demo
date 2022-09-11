@@ -28,22 +28,31 @@ class CountDown extends React.Component {
 		}
 	}
 
+	componentDidMount(){
+		this.tick()
+	}
+
 	tick(){
 		let timerID = setInterval(() => {
-			// this.state.seconds-=1;// do not change state like that
-			this.setState({seconds:this.state.seconds-1})
+			// if(this.state.seconds===0){
+			// 	clearInterval(timerID)
+			// }else{
+			// 	this.setState((prevState)=>({seconds:prevState.seconds-1}))
+			// }
 
-			// When "seconds" is 0 => clearInterval(timerID);
-			if(this.state.seconds===0){
-				clearInterval(timerID)
-			}
+			this.setState((prevState)=>{
+				if(prevState.seconds===0){
+					clearInterval(timerID)
+					return prevState
+				}else{
+					return {seconds:prevState.seconds-1}
+				}
+			})
+
 		}, 1000);
-
-
 	}
 
 	render() {
-		this.tick();
 		return (
 			<div>
 				{this.state.seconds}
