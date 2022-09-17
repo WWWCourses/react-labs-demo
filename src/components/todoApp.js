@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createRef} from 'react';
 
 class TodoApp extends React.Component {
 	constructor(props){
@@ -6,12 +6,13 @@ class TodoApp extends React.Component {
 		this.state = {
 			todos: [],
 		}
+		this.url = 'http://localhost:3003/todos'
 	}
 
 	componentDidMount(){
 		// fetch initial todos
-		const url = 'https://jsonplaceholder.typicode.com/todos'
-		fetch(url)
+
+		fetch(this.url)
 			.then(r=>{
 				if(r.ok){
 					return r.json()
@@ -27,14 +28,29 @@ class TodoApp extends React.Component {
 	addTodo=(title)=>{
 		console.log(`addtodo`);
 		const newTodo = {
-			id:this.state.todos.length+1,
 			title: title,
 			completed: false,
 		}
 
-		this.setState({
-			todos:[...this.state.todos,newTodo]
+		fetch(this.url, {
+			method:"Post",
+			body:JSON.stringify(newTodo),
+			headers:{
+				"content-type":"application/json"
+			}
 		})
+		.then(responese=>{
+			if(responese.ok){
+				return responese.json()
+			}
+		})
+		.then(todo=>{
+			this.setState({
+				todos:[...this.state.todos,todo]
+			})
+		})
+
+
 
 		// console.log(`newTodo: ${newTodo}`);
 	}
@@ -78,19 +94,33 @@ class TodoAdd extends React.Component {
 		this.state = {
 			value:""
 		}
+
+		this.inputRef = createRef()
+	}
+
+	clickHandler=(e)=>{
+		this.props.addTodo(this.state.value)
+		// this.state.value = ""
+		this.setState({value:""})
+
+		// focus input
+		this.inputRef.current.focus()
 	}
 
 	render() {
 		return (
 			<div className="todo-add">
 				<input type="text"
+					ref={this.inputRef}
 					autoFocus
 					placeholder="add new todo ..."
-					onChange={(e)=>{this.setState({value:e.target.value})}}/>
+					value={this.state.value}
+					onChange={(e)=>{this.setState({value:e.target.value})}}
+				/>
 				<button
 					className="todo-add-btn"
-					onClick={(e)=>{this.props.addTodo(this.state.value)}}
-					type="button">Add</button>
+					onClick={this.clickHandler}
+					type="button">Add {/*test*/}</button>
 			</div>
 		);
 	}
