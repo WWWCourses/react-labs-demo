@@ -6,18 +6,20 @@ function TodoApp(props) {
 	const [counter, setCounter] = useState(1)
 	const [todos, setTodos] = useState([])
 
-	const fetchTodos =fetch(url)
-		.then(r=>{
-			if(r.ok){
-				return r.json()
-			}
-		})
-		.then(data=> {
-			// todos = data;
-			// this.setState({todos:data})
-			setTodos(data)
-		})
-		.catch( err=>console.warn(err) );
+	const fetchTodos = ()=>{
+		fetch(url)
+			.then(r=>{
+				if(r.ok){
+					return r.json()
+				}
+			})
+			.then(data=> {
+				// todos = data;
+				// this.setState({todos:data})
+				setTodos(data)
+			})
+			.catch( err=>console.warn(err) );
+	}
 
 
 	const addTodo=(title)=>{
