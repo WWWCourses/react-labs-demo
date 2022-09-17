@@ -1,38 +1,33 @@
-import React, {createRef} from 'react';
+import React, {createRef, useState, useEffect} from 'react';
 
-class TodoApp extends React.Component {
-	constructor(props){
-		super(props)
-		this.state = {
-			todos: [],
-		}
-		this.url = 'http://localhost:3003/todos'
-	}
+function TodoApp(props) {
+	let url = 'http://localhost:3003/todos';
 
-	componentDidMount(){
-		// fetch initial todos
+	const [counter, setCounter] = useState(1)
+	const [todos, setTodos] = useState([])
 
-		fetch(this.url)
-			.then(r=>{
-				if(r.ok){
-					return r.json()
-				}
-			})
-			.then(data=> {
-				// todos = data;
-				this.setState({todos:data})
-			})
-			.catch( err=>console.warn(err) );
-	}
+	const fetchTodos =fetch(url)
+		.then(r=>{
+			if(r.ok){
+				return r.json()
+			}
+		})
+		.then(data=> {
+			// todos = data;
+			// this.setState({todos:data})
+			setTodos(data)
+		})
+		.catch( err=>console.warn(err) );
 
-	addTodo=(title)=>{
+
+	const addTodo=(title)=>{
 		console.log(`addtodo`);
 		const newTodo = {
 			title: title,
 			completed: false,
 		}
 
-		fetch(this.url, {
+		fetch(url, {
 			method:"Post",
 			body:JSON.stringify(newTodo),
 			headers:{
@@ -45,9 +40,10 @@ class TodoApp extends React.Component {
 			}
 		})
 		.then(todo=>{
-			this.setState({
-				todos:[...this.state.todos,todo]
-			})
+			// this.setState({
+			// 	todos:[...this.state.todos,todo]
+			// })
+			setTodos([...todos,todo])
 		})
 
 
@@ -55,25 +51,25 @@ class TodoApp extends React.Component {
 		// console.log(`newTodo: ${newTodo}`);
 	}
 
-	removeTodo=()=>{
+	const removeTodo=()=>{
 		//...
 	}
 
-	changeTodo=()=>{
+	const changeTodo=()=>{
 		//
 	}
 
-	render() {
-		return (
-			<div className="page">
-				<header>Simple Todo App</header>
-				<main className="todo-app">
-				<TodoAdd addTodo={this.addTodo}/>
-				<TodoList todos={this.state.todos}/>
-				</main>
-			</div>
-		);
-	}
+	useEffect(fetchTodos,[])
+
+	return (
+		<div className="page">
+			<header>Simple Todo App</header>
+			<main className="todo-app">
+			<TodoAdd addTodo={addTodo}/>
+			<TodoList todos={todos}/>
+			</main>
+		</div>
+	);
 }
 
 function TodoList({todos}) {
@@ -88,42 +84,35 @@ function TodoList({todos}) {
 }
 
 
-class TodoAdd extends React.Component {
-	constructor(props){
-		super(props)
-		this.state = {
-			value:""
-		}
+function TodoAdd(props){
+	let inputRef = createRef();
+	const [value, setValue] = useState("")
 
-		this.inputRef = createRef()
-	}
-
-	clickHandler=(e)=>{
-		this.props.addTodo(this.state.value)
+	const clickHandler=(e)=>{
+		props.addTodo(value)
 		// this.state.value = ""
-		this.setState({value:""})
+		// this.setState({value:""})
+		setValue("")
 
 		// focus input
-		this.inputRef.current.focus()
+		inputRef.current.focus()
 	}
 
-	render() {
-		return (
-			<div className="todo-add">
-				<input type="text"
-					ref={this.inputRef}
-					autoFocus
-					placeholder="add new todo ..."
-					value={this.state.value}
-					onChange={(e)=>{this.setState({value:e.target.value})}}
-				/>
-				<button
-					className="todo-add-btn"
-					onClick={this.clickHandler}
-					type="button">Add {/*test*/}</button>
-			</div>
-		);
-	}
+	return (
+		<div className="todo-add">
+			<input type="text"
+				ref={inputRef}
+				autoFocus
+				placeholder="add new todo ..."
+				value={value}
+				onChange={(e)=>{setValue(e.target.value)}}
+			/>
+			<button
+				className="todo-add-btn"
+				onClick={clickHandler}
+				type="button">Add {/*test*/}</button>
+		</div>
+	);
 }
 
 
