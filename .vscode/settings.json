@@ -1,4 +1,5 @@
 {
+	// make emmet to complete JSX in js and ts files:
 	"emmet.includeLanguages": {
 		"javascript": "javascriptreact",
 		"typescript": "typescriptreact"

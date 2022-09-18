@@ -1,9 +1,6 @@
-function foo() {
-	let seconds = 3;
+const arr = [1,2]
 
-	setInterval(() => {
-		console.log(`seconds = ${seconds}`);
-	}, 1000);
-}
+const [,b] = arr
 
-console.log( foo() );
+// console.log(`a: ${a}`);
+console.log(`b: ${b}`);

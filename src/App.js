@@ -8,7 +8,12 @@
 // import StateAndEventsDemo from "./components/stateAndEventsDemo";
 // import GetInput from "./components/getInputValueDemo";
 // import LifeCycleMethods from "./components/lifecycleMethods";
-import TodoApp from "./components/todoApp";
+// import ContextDemo from "./components/contextDemo";
+// import ContextDemo from "./components/contextDemos/counterContext";
+// import Parent from "./components/contextDemos/parent";
+import TodoApp from "./components/todoApp/todoApp";
+import TodosContexWrapper from "./components/todoApp/todosContext";
+
 
 import "./main.css";
 
@@ -19,9 +24,11 @@ function App(props) {
 	// const el = <GetInput/>
 	// console.dir(el);
 	// return el
-
 	// return <LifeCycleMethods/>
-	return <TodoApp/>
+	// return <Parent/>
+	return <TodosContexWrapper>
+		<TodoApp/>
+	</TodosContexWrapper>
 }
 
 export default App;
